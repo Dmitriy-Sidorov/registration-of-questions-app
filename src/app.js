@@ -39,11 +39,21 @@ function openModal() {
 function authFormHandler(event) {
     event.preventDefault()
 
+    const $btn = event.target.querySelector('button')
     const email = document.querySelector('#email').value
     const password = document.querySelector('#password').value
+    $btn.disabled = true
 
     authWithEmailAndPassword(email, password)
-        .then(token => {
+        .then(Question.fetch)
+        .then(renderModalAfterAuth)
+        .then(() => $btn.disabled = false)
+}
 
-        })
+function renderModalAfterAuth(content) {
+    if (typeof content === 'string') {
+        createModal('Ошибка!', content)
+    } else {
+        createModal('Список вопросов', Question.listToHTML(content))
+    }
 }
