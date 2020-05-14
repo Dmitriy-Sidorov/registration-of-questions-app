@@ -1,6 +1,7 @@
 import '../node_modules/muicss/dist/js/mui.js'
 import {Question} from './Question';
-import {isValid} from './utils';
+import {isValid, createModal} from './utils';
+import {authWithEmailAndPassword, getAuthForm} from './auth';
 import './style/main.scss'
 
 const $form = document.querySelector('#form')
@@ -26,4 +27,23 @@ function submitFormHandler(event) {
             $input.className = ''
         })
     }
+}
+
+function openModal() {
+    createModal('Авторизация', getAuthForm())
+    document
+        .querySelector('#auth-form')
+        .addEventListener('submit', authFormHandler, {once: true})
+}
+
+function authFormHandler(event) {
+    event.preventDefault()
+
+    const email = document.querySelector('#email').value
+    const password = document.querySelector('#password').value
+
+    authWithEmailAndPassword(email, password)
+        .then(token => {
+
+        })
 }
