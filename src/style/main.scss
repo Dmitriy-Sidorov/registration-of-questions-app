@@ -2,10 +2,32 @@
 @import '../../node_modules/muicss/dist/css/mui.css';
 @import 'style.css';
 
-.container {
-    background: red;
-    display: flex;
-    h1 {
+#sidebar {
+    background-color: #2196F3;
+}
+
+.author {
+    font-size: .8rem;
+}
+
+.floating-btn {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+}
+
+.modal {
+    max-width: 600px;
+    max-height: 300px;
+    margin: 100px auto;
+    overflow-y: auto;
+    background: #fff;
+
+    > h1 {
         text-align: center;
+    }
+
+    .modal-content {
+        padding: 1rem;
     }
 }
