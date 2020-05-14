@@ -1,0 +1,11 @@
+@import '../../node_modules/normalize.css/normalize.css';
+@import '../../node_modules/muicss/dist/css/mui.css';
+@import 'style.css';
+
+.container {
+    background: red;
+    display: flex;
+    h1 {
+        text-align: center;
+    }
+}
