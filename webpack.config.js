@@ -43,7 +43,7 @@ const cssLoaders = () => {
             options: {
                 plugins: [
                     Autofix({
-                        grid: "autoplace"
+                        grid: 'autoplace'
                     })
                 ],
                 sourceMap: true
@@ -70,7 +70,7 @@ const plugins = () => {
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: {
-        main: './app.js',
+        main: ['@babel/polyfill', './app.js']
     },
     output: {
         filename: filename('js'),
@@ -83,6 +83,22 @@ module.exports = {
     plugins: plugins(),
     module: {
         rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            '@babel/preset-env'
+                        ],
+                        plugins: [
+                            '@babel/plugin-proposal-class-properties',
+                            '@babel/plugin-proposal-private-methods'
+                        ]
+                    }
+                }]
+            },
             {
                 test: /\.css$/,
                 use: cssLoaders()
